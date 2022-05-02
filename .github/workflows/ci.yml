@@ -6,7 +6,7 @@ env:
   python_version: 3.9
   # Variables used to configure
   IMAGE_REGISTRY: ghcr.io
-  IMAGE_REPO: JaSilez/fast-api-lab
+  IMAGE_REPO: fast-api-lab
   IMAGE_NAME: fast-api
   VERSION: develop
 
@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push
         run: |
           IMAGE_LATEST="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:latest"
-          docker build -t $IMAGE_LATEST .
+          docker build -t latest .
           docker push $IMAGE_LATEST
 
 
