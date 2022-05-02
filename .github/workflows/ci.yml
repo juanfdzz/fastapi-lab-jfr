@@ -80,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v2
         id: docker_build
         with:
-          load: true
+          load: false
           pull: false
           push: true # ${{ github.event_name == "pull_request" }}    
           tags: ${{ github.repository }}:test
