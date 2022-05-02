@@ -33,7 +33,6 @@ jobs:
         name: flake8-coverage-report
         path: reports/flake8/
 
-
   pytest:
     name: Unit Testing
     needs: flake8
