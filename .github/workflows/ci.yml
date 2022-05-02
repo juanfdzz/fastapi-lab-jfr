@@ -4,6 +4,11 @@ on: pull_request
 
 env:
   python_version: 3.9
+  # Variables used to configure
+  IMAGE_REGISTRY: ghcr.io
+  IMAGE_REPO: fast-api-lab
+  IMAGE_NAME: fast-api
+  VERSION: develop
 
 jobs:
 
@@ -69,14 +74,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
-      - name: Build and push
+      - name: Build and Push
         id: docker_build
-        uses: docker/build-push-action@v2
+        run: |
+            docker build -t ${{ IMAGE }} -t ${{ IMAGE_LATEST }} .
+            docker push ${{ IMAGE }}
+	          docker push ${{ IMAGE_LATEST }}
         with:
-          push: true
-          tags: ${{ github.event.repository.name }}:latest
-          secrets: |
-              GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          # Variables used to configure docker images registries to build and push
+          IMAGE:  ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          IMAGE_LATEST:	= ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}::latest
+
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
