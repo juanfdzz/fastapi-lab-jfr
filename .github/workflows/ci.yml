@@ -82,8 +82,7 @@ jobs:
         with:
           load: true
           pull: false
-          push: true # ${{ github.event_name == "pull_request" }}
-          labels: [ lab ]          
+          push: true # ${{ github.event_name == "pull_request" }}    
           tags: ${{ github.repository }}:test
       
       - name: Image digest
