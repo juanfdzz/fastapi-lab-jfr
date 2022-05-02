@@ -76,12 +76,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
 
+
+      # IMAGE="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${GITHUB_REF#refs/tags/v}"
+      # docker push $IMAGE
       - name: Build and Push
         run: |
-          # IMAGE="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${GITHUB_REF#refs/tags/v}"
           IMAGE_LATEST="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:latest"
           docker build -t $IMAGE -t $IMAGE_LATEST .
-          # docker push $IMAGE
 	        docker push $IMAGE_LATEST
 
 
