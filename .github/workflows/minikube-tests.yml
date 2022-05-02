@@ -21,7 +21,7 @@ jobs:
           sleep 10
           kubectl get nodes
       - name: Install Helm
-        uses: azure/setup-helm@v2
+        uses: azure/setup-helm@v1
         with:
           version: "v3.8.2"
       - name: Deploy Chart fastapi
