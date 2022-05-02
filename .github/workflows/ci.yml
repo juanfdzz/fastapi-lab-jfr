@@ -6,7 +6,7 @@ env:
   python_version: 3.9
   # Variables used to configure
   IMAGE_REGISTRY: ghcr.io
-  IMAGE_REPO: ${{ github.repository }}
+  IMAGE_REPO: jasilez/fastapi-lab
   VERSION: develop
 
 jobs:
@@ -83,7 +83,7 @@ jobs:
           load: false
           pull: false
           push: true # ${{ github.event_name == "pull_request" }}    
-          tags: ${{ github.repository_owner }}/${{ github.repository.name }}:test
+          tags: ${{ env.IMAGE_REPO }}:lattest
       
       - name: Image digest
         run: |
