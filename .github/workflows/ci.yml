@@ -1,6 +1,12 @@
 name: CI FastAPI
 
-on: pull_request
+on:
+
+  pull_request:
+
+  push:
+    branches:
+      - main
 
 env:
   python_version: 3.9
@@ -11,6 +17,7 @@ env:
 
 jobs:
   flake8:
+    if: $ {{github.event.name == 'pull_request' }}
     name: Code Quality
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +41,7 @@ jobs:
         path: reports/flake8/
 
   pytest:
+    if: $ {{github.event.name == 'pull_request' }}
     name: Unit Testing
     needs: flake8
     runs-on: ubuntu-latest
@@ -59,6 +67,7 @@ jobs:
 
 
   docker_ci:
+    if: $ {{github.event.name == 'push' }}
     name: Build & Push Image
     needs: pytest
     runs-on: ubuntu-latest
@@ -83,7 +92,7 @@ jobs:
           load: false
           pull: false
           push: true # ${{ github.event_name == "pull_request" }}    
-          tags: ${{ env.IMAGE_REPO }}:lattest
+          tags: ${{ env.IMAGE_REPO }}:latest
       
       - name: Image digest
         run: |
