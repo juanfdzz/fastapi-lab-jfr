@@ -81,9 +81,9 @@ jobs:
         id: docker_build
         with:
           load: true
-          pull: ${{ inputs.pull }}
+          pull: false
           push: true # ${{ github.event_name == "pull_request" }}
-          labels: ${{ inputs.labels }}
+          labels: [ lab ]          
           tags: ${{ github.repository }}:test
       
       - name: Image digest
