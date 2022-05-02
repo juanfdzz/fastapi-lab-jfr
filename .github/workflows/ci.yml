@@ -78,7 +78,8 @@ jobs:
 
       - name: Build and Push
         run: |
-          ls
+          IMAGE="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}"
+          IMAGE_LATEST="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}::latest"
 
 
 #      - name: Image digest
