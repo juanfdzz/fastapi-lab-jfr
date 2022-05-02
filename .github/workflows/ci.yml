@@ -75,6 +75,8 @@ jobs:
         with:
           push: true
           tags: fast-api:latest
+        secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
