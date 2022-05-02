@@ -17,7 +17,7 @@ env:
 
 jobs:
   flake8:
-    if: $ {{github.event.name == 'pull_request' }}
+    if: ${{github.event.name == 'pull_request' }}
     name: Code Quality
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
         path: reports/flake8/
 
   pytest:
-    if: $ {{github.event.name == 'pull_request' }}
+    if: ${{github.event.name == 'pull_request' }}
     name: Unit Testing
     needs: flake8
     runs-on: ubuntu-latest
