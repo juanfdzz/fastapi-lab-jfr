@@ -53,7 +53,7 @@ jobs:
       
       - name: Login to GHCR
         run: |
-          echo "${{ github.token }}" | docker login ghcr.io -u ${{ github.actor}} --password-stdin
+          echo "${{ secrets.PAT }}" | docker login ${{ env.IMAGE_REGISTRY }} -u ${{ github.actor}} --password-stdin
       
       - name: Build and push into ghcr.io
         uses: docker/build-push-action@v2
@@ -62,28 +62,8 @@ jobs:
           load: false
           pull: false
           push: true # ${{ github.event_name == "pull_request" }}    
-          tags: ${{ env.IMAGE_REPO }}:latest
+          tags: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}:latest
       
       - name: Image digest
         run: |
           echo ${{ steps.docker_build.outputs.digest }}
-          
-
-      - name: Public IP
-        id: ip
-        uses: haythem/public-ip@v1.2
-
-      - name: Print Public IP & Docker Run
-        run: |
-          echo ${{ steps.ip.outputs.ipv4 }}
-          echo ${{ steps.ip.outputs.ipv6 }}
-          docker run -d -p 8000:8000 -p 8081:8081 --name simple-server ghcr.io/${{ github.repository }}:latest
-  
-
-      - name: Print Public IP & Docker Run
-        run: |
-          echo ${{ steps.ip.outputs.ipv4 }}
-          echo ${{ steps.ip.outputs.ipv6 }}
-          docker run -d -p 8000:8000 -p 8081:8081 --name simple-server ghcr.io/${{ github.repository }}:latest
-          docker rmi  ghcr.io/${{ github.repository }}:latest
-  
