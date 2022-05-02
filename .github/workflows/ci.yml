@@ -31,7 +31,12 @@ jobs:
 
       # IMAGE="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${GITHUB_REF#refs/tags/v}"
       # docker push $IMAGE
-
+      #- name: Build and Push
+      #  run: |
+      #    IMAGE_LATEST=${{ env.IMAGE_REPO }}:latest
+      #    docker build -t $IMAGE_LATEST .
+      #    docker push $IMAGE_LATEST
+          
       - name: Build and publish a Docker image for ${{ github.repository }}
         uses: macbre/push-to-ghcr@master
         with:
