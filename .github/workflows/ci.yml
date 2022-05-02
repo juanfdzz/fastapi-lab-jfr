@@ -80,6 +80,8 @@ jobs:
         run: |
           IMAGE="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}"
           IMAGE_LATEST="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}::latest"
+          docker build -t $IMAGE -t $IMAGE_LATEST .
+
 
 
 #      - name: Image digest
