@@ -67,7 +67,7 @@ jobs:
 
 
   docker_ci:
-    if: $ {{github.event.name == 'push' }}
+    if: ${{github.event.name == 'push' }}
     name: Build & Push Image
     needs: pytest
     runs-on: ubuntu-latest
