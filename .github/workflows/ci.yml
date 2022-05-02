@@ -33,7 +33,7 @@ jobs:
       # docker push $IMAGE
       - name: Build and Push
         run: |
-          IMAGE_LATEST=${{ env.IMAGE_REPO }}:latest"
+          IMAGE_LATEST=${{ env.IMAGE_REPO }}:latest
           docker build -t $IMAGE_LATEST .
           docker push $IMAGE_LATEST
 
