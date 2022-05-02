@@ -76,8 +76,7 @@ jobs:
         id: ghcr
         run: |
           echo "${{ github.token }}" | docker login ghcr.io -u ${{ github.actor}} --password-stdin
-          # convert into lowercas
-          repo=$(echo ${{ github.repository } | tr '[:upper:]' '[:lower:]')
+          repo=$(echo '${{ github.repository }' | tr '[:upper:]' '[:lower:]')
       
       - name: Build and push into ghcr.io
         uses: docker/build-push-action@v2
