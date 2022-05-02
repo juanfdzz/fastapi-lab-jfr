@@ -17,4 +17,19 @@ jobs:
           kubernetes version: 'v1.23.0'
           github token: ${{ secrets.GITHUB_TOKEN }}
       - name: Interact with the cluster
-        run: kubectl get nodes
+        run: |
+          sleep 10
+          kubectl get nodes
+      - name: Install Helm
+        uses: azure/setup-helm@v2
+        with:
+          version: "v3.8.2"
+      - name: Deploy Chart fastapi
+        working-directory: charts/fastapi
+        run: |
+          helm upgrade -i fastapi . --namespace default
+      - name: Helm ls
+        working-directory: charts/fastapi
+        run: |
+          sleep 20
+          helm ls
