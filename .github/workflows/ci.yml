@@ -76,9 +76,7 @@ jobs:
           registry: ghcr.io
 
       - name: Build and Push
-        run: | 
-          IMAGE=${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          IMAGE_LATEST=${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}::latest
+        run: |
           docker build -t $IMAGE -t $IMAGE_LATEST .
           docker push $IMAGE
 	        docker push $IMAGE_LATEST
