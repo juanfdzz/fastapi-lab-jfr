@@ -268,7 +268,7 @@ Nota: Siempre que realicemos un add ,hay que realizar un update , esto permite q
 		minikube addons enable metrics-server -p practica-mod6
 
 
-## Despliegue de aplicación fast-api
+## Despliegue de aplicación fastapi
 
  Se ha creado un helm chart en la carpeta fast-api-webapp para la aplicación fastapi:0.0.2 desarrollada en los anteriores apartados, en la cual se han realizado modificaciones respecto a las versiones anteriores para disponer de métricas mediante prometheus. Para desplegarla es necesario realizar los siguientes pasos:
 		
@@ -282,7 +282,7 @@ Nota: Siempre que realicemos un add ,hay que realizar un update , esto permite q
 
    I.exportamos las variables( guardaremos en POD_NAME, el resultado de realizar la consulta kubectl):
    
-    		export POD_NAME=$(kubectl get pods  -l "app.kubernetes.io/name=fast-api-webapp,app.kubernetes.io/instance=my-app" -o jsonpath="{.items[0].metadata.name}")
+    		export POD_NAME=$(kubectl get pods  -l "app.kubernetes.io/name=fastapi,app.kubernetes.io/instance=my-app" -o jsonpath="{.items[0].metadata.name}")
     		export CONTAINER_PORT=$(kubectl get pod  $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
   
   II.Realizaremos el port-forward ( **tendremos que modificar $CONTAINER_PORT--->8081, puesto que nuestra aplicacion se levanta por el puerto 8081 y podremos acceder a nuestra aplicacion a traves de la url http://127.0.0.0.0:8081**):
@@ -292,7 +292,7 @@ Nota: Siempre que realicemos un add ,hay que realizar un update , esto permite q
      			kubectl  port-forward $POD_NAME 8081:8081
    
 
-   - Abriremos otra ventana he introduciremos el siguiente comando y podremos observar los pods creados en el namespace donde deplegamos fast-api server:
+   - Abriremos otra ventana he introduciremos el siguiente comando y podremos observar los pods creados en el namespace donde deplegamos fastapi server:
    			
 			kubectl -n fastapi get po -w
 
