@@ -75,6 +75,17 @@ jobs:
     steps:
       - name: Download code
         uses: actions/checkout@v3
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -106,7 +117,7 @@ jobs:
           load: false
           pull: false
           push: true # ${{ github.event_name == "pull_request" }}    
-          tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY  }}:${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY  }}:${{ github.ref }}
           
       - name: Image digest
         run: |
