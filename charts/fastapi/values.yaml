@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: ghcri.io/jasilez/fastapi-lab
+  repository: leosn/fast-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "0.0.2"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -23,7 +23,8 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+podAnnotations:
+  reloader.stakater.com/auto: "true"
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -35,6 +36,20 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+
+
+
+## -- Metrics configuration of the application to deploy
+metrics:
+  # -- Indicates whether this app will expose metrics
+  enabled: true
+  # -- Service configuration used for metrics
+  svc:
+    # -- Service port number used for metrics
+    port: 8000
+    # -- Service port name used for metrics
+    name: metrics
+
 
 service:
   type: ClusterIP
@@ -56,24 +71,20 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 300
 
 nodeSelector: {}
 

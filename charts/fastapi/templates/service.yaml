@@ -11,5 +11,11 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    {{- if .Values.metrics.enabled }}
+    - port: {{ .Values.metrics.svc.port }}
+      targetPort: {{ .Values.metrics.svc.port }}
+      protocol: TCP
+      name: {{ .Values.metrics.svc.name }}
+    {{- end }}
   selector:
     {{- include "fastapi.selectorLabels" . | nindent 4 }}
