@@ -38,7 +38,6 @@ securityContext: {}
   # runAsUser: 1000
 
 
-
 ## -- Metrics configuration of the application to deploy
 metrics:
   # -- Indicates whether this app will expose metrics
