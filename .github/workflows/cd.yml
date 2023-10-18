@@ -11,14 +11,14 @@ env:
   python_version: 3.9
   # Variables used to configure
   REGISTRY: ghcr.io
-  REPOSITORY: jasilez/fastapi-lab
+  REPOSITORY: juanfdzz/fastapi-lab-jfr
 
 
 jobs:
 
   flake8:
     name: Code Quality
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:20.04
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8

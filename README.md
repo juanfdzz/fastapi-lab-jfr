@@ -1,8 +1,5 @@
  # liberando-productos
  
- ### Practica liberando productos
-  - Leonardo Silva Nevado
-
 # Pre-requisitos
  - Ubuntu 20.04 /windows10 / MACS SO
  - Docker
@@ -10,12 +7,6 @@
  - kubectl
  - Helm
 
-
-## Objetivo
-
-El objetivo es mejorar un proyecto inicial creado previamente para ponerlo en producción, a través de la adicción de una serie de mejoras.
-
-Para la descripción del proyecto nos hemos basado en los laboratorios realizados en clase :
 
 ## Descripción del Proyecto 
 
